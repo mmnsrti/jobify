@@ -1,4 +1,5 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
+import ScreenHeader from "./common/header/ScreenHeader";
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -11,6 +12,7 @@ import { default as JobTabs } from "./jobdetails/tabs/Tabs";
 import { default as JobAbout } from "./jobdetails/about/About";
 import { default as JobFooter } from "./jobdetails/footer/Footer";
 import Specifics from "./jobdetails/specifics/Specifics";
+import Requirement from './jobdetails/requirement/Requirement'
 
 // common
 import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
@@ -25,5 +27,7 @@ export {
   JobAbout,
   JobFooter,
   Specifics,
-  NearbyJobCard
+  NearbyJobCard,
+  ScreenHeader,
+  Requirement
 };

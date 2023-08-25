@@ -1,7 +1,8 @@
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView,Image,TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { COLORS, icons, images, SIZES } from "../constants";
+import favicon from '../assets/favicon.png'
 import {
   Nearbyjobs,
   Popularjobs,
@@ -9,7 +10,7 @@ import {
   Welcome,
 } from "../components";
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -18,28 +19,29 @@ const Home = () => {
           headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
+            <ScreenHeaderBtn  dimension="60%" />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.profile} dimension="100%" />
+            <TouchableOpacity onPress={() => { router.push('/') }}>
+                <Image source={favicon}  style={{width:'41px',height:'53px'}} resizeMode='cover' />
+            </TouchableOpacity>
           ),
           headerTitle: "",
         }}
       />
-      <ScrollView showsHorizontalScrollIndicator={false} >
-        <View 
-        style={{flex:1,padding:SIZES.medium}}
-        ><Welcome
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          handleClick={()=>{
-            if(searchTerm){
-              router.push(`/search/${searchTerm}`)
-            }
-          }}
-        />
-        <Popularjobs/>
-        <Nearbyjobs/>
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <View style={{ flex: 1, padding: SIZES.medium }}>
+          <Welcome
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleClick={() => {
+              if (searchTerm) {
+                router.push(`/search/${searchTerm}`);
+              }
+            }}
+          />
+          <Popularjobs />
+          <Nearbyjobs />
         </View>
       </ScrollView>
     </SafeAreaView>

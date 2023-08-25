@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium - 2,
     color: COLORS.primary,
     fontFamily: FONT.medium,
+    marginRight: 4, // Adjust spacing
   },
   locationBox: {
     flexDirection: "row",
@@ -49,12 +50,25 @@ const styles = StyleSheet.create({
     width: 14,
     height: 14,
     tintColor: COLORS.gray,
+    marginRight: 2,
   },
   locationName: {
     fontSize: SIZES.medium - 2,
     color: COLORS.gray,
     fontFamily: FONT.regular,
-    marginLeft: 2,
+  },
+  remoteJobBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 10, // Adjust spacing
+  },
+  remoteJobImage: {
+    width: 22,
+    height: 22,
+    tintColor: COLORS.remoteJobColor, // Define the appropriate color for the remote job icon
+    marginLeft: 193,
+    marginTop:-19
   },
 });
 

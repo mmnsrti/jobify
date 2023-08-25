@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { checkImageURL } from "../../../../utils";
 import styles from "./popularjobcard.style";
-
+import { icons } from "../../../../constants";
 const PopularJobCard = ({ handlePress, selectedJob, item }) => {
   return (
     <TouchableOpacity
@@ -20,16 +20,20 @@ const PopularJobCard = ({ handlePress, selectedJob, item }) => {
           style={styles.logoImage}
         />
       </TouchableOpacity>
+
       <Text style={styles.companyName} numberOfLines={1}>
         {item.employer_name}
       </Text>
       <View style={styles.infoContainer}>
-        <Text style={styles.jobName(selectedJob, item)} numberOfLines={1}>
-          {item.job_title}
-        </Text>
-        <Text style={styles.location} numberOfLines={1}>
-          {item.job_country}
-        </Text>
+     <View style={styles.infoContainer}>
+       <Text style={styles.jobName(selectedJob, item)} numberOfLines={1}>
+         {item.job_title}
+       </Text>
+       <Text style={styles.location} numberOfLines={1}>
+         {item.job_country} {item.job_is_remote ? <Image source={icons.remoteJob} style={{width:'310px', height:'34px',opacity:'0.7'}} resizeMode="contain" /> : null}
+       </Text>
+     </View>
+     
       </View>
     </TouchableOpacity>
   );

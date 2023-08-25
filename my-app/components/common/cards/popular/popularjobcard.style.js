@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   publisher: (selectedJob) => ({
-    fontSize: SIZES.medium - 2 ,
+    fontSize: SIZES.medium - 2,
     fontFamily: FONT.bold,
     color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
   }),
@@ -53,7 +53,11 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,
     color: "#B3AEC6",
+    justifyContent:'center',
+    alignItems: "center",
+
   },
+
 });
 
 export default styles;
