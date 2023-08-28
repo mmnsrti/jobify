@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  TouchableWithoutFeedback,
+} from "react-native";
 import styles from "./screenheader.style";
 import { useRouter } from "expo-router";
-import { AiOutlineSetting, AiFillSave } from "react-icons/ai";
+import { SimpleLineIcons,AntDesign } from "@expo/vector-icons";
 
 const ScreenHeaderBtn = ({ dimension }) => {
   const [menu, setMenu] = useState(false);
@@ -25,34 +32,35 @@ const ScreenHeaderBtn = ({ dimension }) => {
   const handleSettingPress = useCallback(() => {
     router.push("/setting");
   }, []);
+
   const handleSavedPress = () => {
     router.push("/saved");
   };
-  useEffect(() => {
-    window.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      window.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
+  
   return (
     <View>
-      <TouchableOpacity style={styles.btnContainer} onPress={handlePress}>
-        <AiOutlineSetting style={styles.btnImg(dimension)} />
+      <TouchableOpacity style={styles.btnContainer} onPress={handleSettingPress}>
+        <SimpleLineIcons name="settings" size={24} color="black" />
       </TouchableOpacity>
-      {menu && (
+      {/* {menu && (
         <View style={styles.menuContainer} ref={menuContainerRef}>
           <View style={styles.emptyPage}>
             <TouchableOpacity onPress={() => console.log("Dark Mode")}>
               <View style={styles.button}>
-                <Text style={{marginBottom: '76px'}}>Dark Mode</Text>
+                <Text style={{ marginBottom: "76px" }}>Dark Mode</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleSavedPress}>
-              <View style={styles.button } >
-                <Text style={{ marginLeft: "30px",marginBottom: '23px '}}>Saved</Text>
-                <AiFillSave style={{ position: "absolute" }} fontSize="1.2em" />
+              <View style={styles.button}>
+                <Text style={{ marginLeft: "30px", marginBottom: "23px " }}>
+                  Saved
+                </Text>
+                <AntDesign
+                  name="heart"
+                  style={{ position: "absolute" }}
+                  size={16}
+                  color="black"
+                />
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -61,15 +69,17 @@ const ScreenHeaderBtn = ({ dimension }) => {
             >
               <View style={styles.button}>
                 <Text style={{ marginLeft: "30px" }}>Settings</Text>
-                <AiOutlineSetting
-                  fontSize="1.2em"
+                <SimpleLineIcons
+                  name="settings"
+                  color="black"
                   style={{ position: "absolute" }}
+                  size={16}
                 />
               </View>
             </TouchableOpacity>
           </View>
         </View>
-      )}
+      )} */}
     </View>
   );
 };

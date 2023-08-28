@@ -5,6 +5,7 @@ import { COLORS, FONT, SIZES } from "../../../constants";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    zIndex: 0, // Lower z-index for the Welcome component
   },
   userName: {
     fontFamily: FONT.regular,
@@ -67,6 +68,18 @@ const styles = StyleSheet.create({
     fontFamily: FONT.medium,
     color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
   }),
+  lightContainer: {
+    backgroundColor: COLORS.white, // Adjust as needed
+  },
+  darkContainer: {
+    backgroundColor: COLORS.black, // Adjust as needed
+  },
+  lightThemeText: {
+    color: COLORS.primary, // Adjust as needed
+  },
+  darkThemeText: {
+    color: COLORS.secondary, // Adjust as needed
+  },
 });
 
 export default styles;

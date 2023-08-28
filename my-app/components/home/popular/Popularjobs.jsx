@@ -1,10 +1,12 @@
-import React, { useState, useEffect,useMemo  } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  RefreshControl,
+  ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { COLORS, SIZES } from "../../../constants";
@@ -19,7 +21,14 @@ const Popularjobs = () => {
   const [savedData, setSavedData] = useState(null);
   const [remoteJobsOnly, setRemoteJobsOnly] = useState(false);
   const [sortedData, setSortedData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, isLoading, error, refetch } = useFetch("search", query);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
   const fetchDataFromStorage = async () => {
     try {
       const savedUserData = await AsyncStorage.getItem("userData");
@@ -36,9 +45,8 @@ const Popularjobs = () => {
   };
   useEffect(() => {
     fetchDataFromStorage();
-    
   }, []);
-  
+
   const query = useMemo(() => {
     return {
       query: savedData || "web developer in texas usa",
@@ -47,8 +55,6 @@ const Popularjobs = () => {
       remote_jobs_only: remoteJobsOnly,
     };
   }, [savedData]);
-
-  const { data, isLoading, error } = useFetch("search", query);
 
   useEffect(() => {
     if (data) {
@@ -76,11 +82,20 @@ const Popularjobs = () => {
           <Text style={styles.headerBtn}>Show All</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.cardsContainer}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={COLORS.primary}
+          />
+        }
+      >
         {isLoading ? (
           <ActivityIndicator size="large" color={COLORS.primary} />
         ) : error ? (
-          <Text>{error.message}</Text>
+          <Text>{error} </Text>
         ) : (
           <FlatList
             data={sortedData}
@@ -94,9 +109,16 @@ const Popularjobs = () => {
             keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                tintColor={COLORS.primary}
+              />
+            }
           />
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 };

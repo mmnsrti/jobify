@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
   }),
   menuContainer: {
     position: "absolute",
-    top: "350%",      // Move the menu to the middle vertically
-    left: "313%",     // Move the menu to the middle horizontally
+    top: "350%",
+    left: "313%",
     transform: [
-      { translateX: -100 },  // Adjust this value based on menu width / 2
-      { translateY: -100 },  // Adjust this value based on menu height / 2
+      { translateX: -100 },
+      { translateY: -100 },
     ],
-    zIndex: 1,
+    zIndex: 2, 
   },
   emptyPage: {
     backgroundColor: "white",
@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "gray",
     padding: 20,
+    zIndex: 1,
+
   },
   darkMode: {
     backgroundColor: COLORS.black,

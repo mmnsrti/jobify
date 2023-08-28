@@ -1,5 +1,12 @@
-import React, { useEffect, useState,useMemo } from "react";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import React, { useEffect, useState, useMemo,useCallback } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { COLORS } from "../../../constants";
 import useFetch from "../../../hook/useFetch";
@@ -11,7 +18,14 @@ const Nearbyjobs = () => {
   const router = useRouter();
   const [savedData, setSavedData] = useState(null);
   const [remoteJobsOnly, setRemoteJobsOnly] = useState(false); // Added state for remote jobs only
+  const { data, isLoading, error,refetch } = useFetch("search", query);
+  const [refreshing, setRefreshing] = useState(false);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
   useEffect(() => {
     const fetchDataFromStorage = async () => {
       try {
@@ -40,8 +54,6 @@ const Nearbyjobs = () => {
     };
   }, [savedData]);
 
-  const { data, isLoading, error } = useFetch("search", query);
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -50,11 +62,20 @@ const Nearbyjobs = () => {
           <Text style={styles.headerBtn}>Show All</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.cardsContainer}>
+      <ScrollView
+        
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={COLORS.primary}
+          />
+        }
+      >
         {isLoading ? (
           <ActivityIndicator size="large" color={COLORS.primary} />
         ) : error ? (
-          <Text>{error.message}</Text>
+          <Text>{error}</Text>
         ) : (
           data?.map((job) => (
             <NearbyJobCard
@@ -65,7 +86,7 @@ const Nearbyjobs = () => {
             />
           ))
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 };

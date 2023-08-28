@@ -19,34 +19,36 @@ const useFetch = (endPoint, query) => {
   };
 
   const fetchData = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
       const response = await axios.request(options);
       setData(response.data.data);
     } catch (error) {
       if (error.response && error.response.status === 429) {
         setError("Rate limit exceeded. Please change your API key.");
-        setError(error);
+      } else if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message); // Set the error message from the response
       } else {
-        setError(error);
-        console.log(error);
+        setError("An error occurred while fetching data.");
       }
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
+  
+    useEffect(() => {
     // Fetch API key from AsyncStorage
     const fetchApiKey = async () => {
       try {
         const savedUserData = await AsyncStorage.getItem("userData");
         if (savedUserData) {
           const userData = JSON.parse(savedUserData);
-          const apiKeyFromStorage = userData.api_key || "";
+          const apiKeyFromStorage = userData.api_key ;
           setApiKey(apiKeyFromStorage); // Set the API key to the state
+          
+        } else {
+          setError("Please enter your API key");
         }
       } catch (error) {
         console.error("Error fetching user data from AsyncStorage:", error);
