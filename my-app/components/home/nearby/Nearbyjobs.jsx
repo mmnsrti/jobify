@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo,useCallback } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import {
   View,
   Text,
@@ -18,8 +18,8 @@ const Nearbyjobs = () => {
   const router = useRouter();
   const [savedData, setSavedData] = useState(null);
   const [remoteJobsOnly, setRemoteJobsOnly] = useState(false); // Added state for remote jobs only
-  const { data, isLoading, error,refetch } = useFetch("search", query);
   const [refreshing, setRefreshing] = useState(false);
+  const { data, isLoading, error, refetch } = useFetch("search", query);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -63,7 +63,6 @@ const Nearbyjobs = () => {
         </TouchableOpacity>
       </View>
       <ScrollView
-        
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

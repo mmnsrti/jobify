@@ -11,10 +11,10 @@ import { router, useRouter } from "expo-router";
 import styles from "./welcome.style";
 import { icons, SIZES } from "../../../constants";
 import { useColorScheme } from "react-native";
-const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
 
 const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
+  const jobTypes = ["Full-time", "Part-time", "Contractor"];
   const [activeJobType, setActiveJobType] = useState("Full-time");
 
 

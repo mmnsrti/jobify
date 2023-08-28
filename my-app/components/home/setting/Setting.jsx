@@ -16,8 +16,8 @@ const Setting = ({ navigation }) => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [remoteJobsOnly, setRemoteJobsOnly] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [apiKeyInfoVisible, setApiKeyInfoVisible] = useState(false);
 
@@ -26,7 +26,6 @@ const Setting = ({ navigation }) => {
       setErrorMessage("Please fill in all fields");
       return;
     }
-
     try {
       // Save data to AsyncStorage, including the API key
       const userData = JSON.stringify({

@@ -34,22 +34,22 @@ const index = () => {
     }, [params.id])
   );
   const [likedJobs, setLikedJobs] = useState([]);
-  useEffect(() => {
-    // Fetch liked jobs from AsyncStorage
-    const fetchLikedJobs = async () => {
-      try {
-        const likedJobsData = await AsyncStorage.getItem("likedJobs");
-        if (likedJobsData) {
-          const parsedLikedJobs = JSON.parse(likedJobsData);
-          setLikedJobs(parsedLikedJobs);
-        }
-      } catch (error) {
-        console.error("Error fetching liked jobs from AsyncStorage:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch liked jobs from AsyncStorage
+  //   const fetchLikedJobs = async () => {
+  //     try {
+  //       const likedJobsData = await AsyncStorage.getItem("likedJobs");
+  //       if (likedJobsData) {
+  //         const parsedLikedJobs = JSON.parse(likedJobsData);
+  //         setLikedJobs(parsedLikedJobs);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching liked jobs from AsyncStorage:", error);
+  //     }
+  //   };
 
-    fetchLikedJobs();
-  }, []);
+  //   fetchLikedJobs();
+  // }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen

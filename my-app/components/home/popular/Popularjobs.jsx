@@ -109,13 +109,7 @@ const Popularjobs = () => {
             keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                tintColor={COLORS.primary}
-              />
-            }
+          
           />
         )}
       </ScrollView>

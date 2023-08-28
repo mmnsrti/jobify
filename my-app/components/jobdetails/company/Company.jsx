@@ -41,7 +41,7 @@ const Company = ({
       {jobIsRemote && (
         <View style={styles.remoteJobBox}>
           <Image
-            source={icons.remoteJob} // Assuming you have an icon for remote jobs
+            source={icons.remoteJob} 
             resizeMode="contain"
             style={styles.remoteJobImage}
           />

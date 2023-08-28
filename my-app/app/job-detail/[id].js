@@ -7,7 +7,7 @@ import {
   RefreshControl,
 } from "react-native";
 import { Stack, useRouter, useGlobalSearchParams } from "expo-router";
-import { useCallback, useState, useMemo ,useEffect} from "react";
+import { useCallback, useState, useMemo, useEffect } from "react";
 import {
   Company,
   JobAbout,
@@ -34,7 +34,6 @@ const JobDetails = () => {
   const [likedJobs, setLikedJobs] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const tabs = ["About", "Qualification", "Responsibilities"];
-
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -98,13 +97,15 @@ const JobDetails = () => {
   const handleShare = async () => {
     try {
       await Share.share({
-        message: `Check out this job at ${data[0].employer_name}`,
+        message: `Check out this job at ${data[0]?.employer_name}`,
+        url: data[0]?.job_google_link // Include the job link here
       });
       console.log("shared");
     } catch (error) {
       console.log(error);
     }
   };
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen

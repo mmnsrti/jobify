@@ -19,7 +19,6 @@ const JobSearch = () => {
   const params = useGlobalSearchParams();
   const router = useRouter();
   const [apiKey, setApiKey] = useState(""); // State to store the API key
-
   const [searchResult, setSearchResult] = useState([]);
   const [searchLoader, setSearchLoader] = useState(false);
   const [searchError, setSearchError] = useState(null);
@@ -63,8 +62,7 @@ const JobSearch = () => {
     }
   };
 
-  
-  console.log(apiKey)
+  console.log(apiKey);
   useEffect(() => {
     // Fetch API key from AsyncStorage
     const fetchApiKey = async () => {
@@ -83,8 +81,8 @@ const JobSearch = () => {
     fetchApiKey(); // Fetch API key when the component mounts
   }, []);
   useEffect(() => {
-    if(apiKey) handleSearch();
-   }, [apiKey]);
+    if (apiKey) handleSearch();
+  }, [apiKey]);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
